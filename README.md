@@ -15,18 +15,20 @@ Never lose site of the end result **"What will provide the best user experience"
 
 ##Contents
 
-* [CSS and SASS](#css-and-sass)  
+TODO: update
+
+* [CSS and SASS](#css-and-sass)
  * [Make CSS manageable](#make-css-manageable)
  * [Make CSS modular](#make-css-modular)
  * [Make CSS consistent](#make-css-consistent)
  * [Frameworks](#frameworks)
 * [Templates](#templates)
- * [General](#general) 
+ * [General](#general)
  * [Structure](#structure)
 * [JavaScript](#javascript)
- * [Boilerplate](#boilerplate) 
- * [Coding Guidelines](#coding-guidelines) 
- * [Testing](#testing) 
+ * [Boilerplate](#boilerplate)
+ * [Coding Guidelines](#coding-guidelines)
+ * [Testing](#testing)
 * [Style Guidelines](#style-guidelines)
 * [Project Setup](#project-setup)
 * [Internal](#internal)
@@ -47,7 +49,7 @@ IDs are fine for javascript and html. They are not for styling. Overriding IDs w
 
 Never use !important.  If you do need to use !important (eg: for a javascript override where there is no other option), comment it well and make sure the path is specific to just the place you need it.
 
-Remember that you as a developer may not think of every possible future use of the site,  and the use of either !important or an ID could make future changes harder to implement. If the html does not have the classes you require, add them. 
+Remember that you as a developer may not think of every possible future use of the site,  and the use of either !important or an ID could make future changes harder to implement. If the html does not have the classes you require, add them.
 
 **2. Use classes appropriately**
 
@@ -84,14 +86,34 @@ Where possible, keep media queries inline with the component code. This acknowle
 SASS:
 
     .feature{
-      	// Regular styles
-      	@media (some-size){
-      		// media specific overrides for .feature
+        // Regular styles
+        @media (some-size){
+          // media specific overrides for .feature
         }
     }
 
-**5. Class based browser hacks with original context**  
-Use class based IE overrides, and keep the IE overrides inline with the component code. This makes it easier to maintain IE css when a feature is changed. 
+**5. Keep print media queries with context**: use of `@media print` aids in keeping styles
+modular. [This technique is appropriate for the following browsers](http://www.joshuawinn.com/css-print-media-query/):
+
+TODO: check that use of multiple `@media print` blocks does have performance implications.
+
+* FireFox 3.5
+* Internet Explorer 9
+* Chrome 14
+* Safari 3.2
+* Opera 11
+
+SASS:
+
+    .feature {
+        // Regular styles
+        @media print {
+          // print specific overrides for .feature
+        }
+    }
+
+**6. Class based browser hacks with original context**
+Use class based IE overrides, and keep the IE overrides inline with the component code. This makes it easier to maintain IE css when a feature is changed.
 
 HTML:
 
@@ -104,17 +126,17 @@ HTML:
 
 SASS:
 
-    	.feature{
-    		// Regular styles
-    		.ie8 &{
-    			// IE8 specific overrides for .feature
+      .feature{
+        // Regular styles
+        .ie8 &{
+          // IE8 specific overrides for .feature
              }
-    	}
+      }
 
 CSS:
 
-    	.feature {}
-    	.ie8 .feature {}
+      .feature {}
+      .ie8 .feature {}
 
 
 
@@ -140,7 +162,7 @@ is better than:
 
 While in the latter the HTML is simpler, it reduces flexibility. We want lots of modifiers in a component to create a range of scenarios. The original example assumes there's only one type of modifier. Once this is not the case the single class pattern breaks.
 
-    <a class="btn btn-secondary btn-large"></a> 
+    <a class="btn btn-secondary btn-large"></a>
 
 is better than
 
@@ -148,7 +170,7 @@ is better than
 
 **3. Pages or page types are not components.**
 
-Do not put classes on the body element or similar in order to style a page. This approach should only be used in rare circumstances. 
+Do not put classes on the body element or similar in order to style a page. This approach should only be used in rare circumstances.
 
 If a component looks different on a certain page type, create a css class that explains that difference, and add it to the component.
 
@@ -174,11 +196,11 @@ Having consistent rules which each developer abides by means that teams can quic
 
 **1) Use Mixins sparingly - know when to use @extends or components.**
 
-Mixins can bloat the CSS, consider carefully when you use them. If your mixin is above 5 lines of CSS then it should probably just be a component, or part of a component. Using mixins for rounded-corners, drop-shadows etc is a perfectly good use case. 
+Mixins can bloat the CSS, consider carefully when you use them. If your mixin is above 5 lines of CSS then it should probably just be a component, or part of a component. Using mixins for rounded-corners, drop-shadows etc is a perfectly good use case.
 
 A good way to decide between using a mixin, or using a placeholder or a component is whether the mixin would have a variable passed to it. Mixins without variables would be better as components or placeholders.
 
-If you are using Sass, then @extends and placeholders cut down on code bloat. For example: 
+If you are using Sass, then @extends and placeholders cut down on code bloat. For example:
 
     // Placeholder
     %heading {
@@ -194,7 +216,7 @@ If you are using Sass, then @extends and placeholders cut down on code bloat. Fo
       @extend %heading;
     }
 
-Compiles to: 
+Compiles to:
 
     h1, h2 {
       //heading styles
@@ -206,11 +228,11 @@ Remember that @extends can not be used within media queries.
 
 If using a css preprocessor don't nest more the 3 times if possible (max 5!). This simplifies resulting css rules and makes specificity easier. It also makes it easier to reuse the parts of a component, or restructure the html of a component at a later stage.
 
-If you wouldn’t write it in css, don’t let it output that way when using a preprocessor.
+If you wouldn’t write it in css, don’t let it output that way when using a preprocessor. Regularly check your CSS output and file size to ensure that CSS is well optimised and free from bloat.
 
 **3) Follow the style guidelines used in the project**
 
-If you are using a css framework, mimic the framework where possible. If you are working on a project that exists already, follow the general style guidelines that project has followed in regards to spaces vs tabs, camelCase vs underscore vs hyphen et al. Otherwise, try to follow this guide as much as possible. 
+If you are using a css framework, mimic the framework where possible. If you are working on a project that exists already, follow the general style guidelines that project has followed in regards to spaces vs tabs, camelCase vs underscore vs hyphen et al. Otherwise, try to follow this guide as much as possible.
 
 **4) Class names should contain only hyphens, no underscores or camelCase.**
 
@@ -220,45 +242,11 @@ Just convention. So long as the css is consistently the same, the separator does
 
 Work with your framework, not against it. If you are new to the framework, take a look around and find out what it can do. Try to use the components within a framework before creating your own. Even if you know a framework well, always look at it again before making your own component - it might do something that could do half the work for you. Where possible, copy the style conventions of the framework you are using. Try to keep changes to the original framework to a minimum. Removing styles not needed is ok, but any theming should be done within your own component files.
 
-Deciding upon a framework is up to the scrum team and depends on the best interest of the client and the users. Think about maintainability for the long term. How easy it is for other developers outside of your scrum team to become productive when dealing with the code? Is the framework well documented?
+Deciding upon a framework is up to the team and depends on the best interest of the client and the users. Think about maintainability for the long term. How easy it is for other developers outside of your scrum team to become productive when dealing with the code? Is the framework well documented?
 
-**Frameworks used right now:**
+#### Internal frameworks
 
-<table>
-  <tr>
-    <td></td>
-    <td>IE7</td>
-    <td>IE8</td>
-    <td>Mobile 1st</td>
-    <td>CWP Template integration</td>
-  </tr>
-  <tr>
-    <td>Bootstrap 3.0</td>
-    <td></td>
-    <td>✓ (with js)</td>
-    <td>✓</td>
-    <td>https://gitlab.cwp.govt.nz/cwp-themes/default.git 
-branch: 3.0.0-wip</td>
-  </tr>
-  <tr>
-    <td>Bootstrap 2.*</td>
-    <td>✓</td>
-    <td>✓</td>
-    <td></td>
-    <td>https://gitlab.cwp.govt.nz/cwp-themes/default.git 
-branch: 1.0.0</td>
-  </tr>
-  <tr>
-    <td>Gumby</td>
-    <td></td>
-    <td>✓</td>
-    <td></td>
-    <td>https://gitlab.cwp.govt.nz/nguyer/cwp-gumby-theme.git
-branch:  master
-(Not officially supported)</td>
-  </tr>
-</table>
-
+Any mixins, functions, helpers, hacks and patches which you apply across multiple objects constitute a framework.
 
 ### Grids
 
@@ -269,11 +257,11 @@ Different frameworks do grids differently. Before you start building the scaffol
 ### General
 
 1. Use html5 versions of html tags whenever it is reasonable to do so. They provide better semantic information than older html
-2. Always validate your html. 
-3. Always think of the worst case user. Would you be happy using this site if you were them? Would it make sense to someone who has never used it before? 
+2. Always validate your html.
+3. Always think of the worst case user. Would you be happy using this site if you were them? Would it make sense to someone who has never used it before?
 4. The first H1 attribute on a page should be the page title. If it isn't in the design, use a screen reader accessible hiding technique
 5. Use aria and role attributes where applicable. Never use images for text. Design comes second to accessibility, but in most cases there should be an acceptable compromise.
-6. Use $FirstLast if only the first and last items in a loop need to be styled. This is more semantic than giving each loop item a unique class. 
+6. Use $FirstLast if only the first and last items in a loop need to be styled. This is more semantic than giving each loop item a unique class.
 7. Use data attributes if you want to feed information to javascript. They are easier than classes, and more specific.
 8. Don’t use images for design attributes in your html if it can be done with css.
 9. Avoid inline styles. There are two exceptions:
@@ -286,11 +274,11 @@ Different frameworks do grids differently. Before you start building the scaffol
 
 **Use as few html tags as possible.**
 
-Your html shouldn’t exist just to serve design features. Sometimes this is unavoidable, but if you keep this rule in mind your html will come out cleaner. 
+Your html shouldn’t exist just to serve design features. Sometimes this is unavoidable, but if you keep this rule in mind your html will come out cleaner.
 
 **Code re-use**
 
-Use a DRY (Don’t repeat yourself) technique. If you have used the same code blocks on more than one page, use an include. If it’s slightly different, think about whether you could pass an extra class to the include: 
+Use a DRY (Don’t repeat yourself) technique. If you have used the same code blocks on more than one page, use an include. If it’s slightly different, think about whether you could pass an extra class to the include:
 
     <% include Tiles Context=three-by-three %>
     <% include Tiles Context=two-by-two %>
@@ -301,9 +289,9 @@ then in Tile.ss:
 
 Use component files. If something can be pulled out into a non page specific component, make it an include. Name the file to match the component name, and use css classes to match eg:
 
-    TileNav.ss 
+    TileNav.ss
     _tile-nav.scss
-    .tile-nav { 
+    .tile-nav {
       //styles for this component
     }
 
@@ -324,18 +312,18 @@ The less familiar you are with JavaScript, the more important it is that you tru
 Your code should be wrapped in a closure to avoid polluting the global namespace. If you are using, jQuery, you can use the following boilerplate:
 
     /*jslint browser: true, nomen: true,  white: true */
-    
+
     jQuery(function($) {
     "use strict";
       //Code
     });
-    
 
-Note: This will delay "//Code" execution until DOM ready. You may not need to delay all javascript execution in this way. 
+
+Note: This will delay "//Code" execution until DOM ready. You may not need to delay all javascript execution in this way.
 
 ### Coding guidelines
 
-1. if/else/for/while/try statements** always** have braces and always go on multiple lines. 
+1. if/else/for/while/try statements** always** have braces and always go on multiple lines.
 
 JavaScript allows an if to be written like this:
 
@@ -343,15 +331,15 @@ JavaScript allows an if to be written like this:
 
 That form is known to contribute to mistakes in projects where many developers are working on the same code. That is why JSLint expects the use of a block:
 
-    if (*condition*) { 
-    
-      *statements*; 
-    
+    if (*condition*) {
+
+      *statements*;
+
     }
 
 Experience shows that this form is more resilient.
 
-2. Strict equality checks (===) must be used in favor of abstract equality checks (==). 
+2. Strict equality checks (===) must be used in favor of abstract equality checks (==).
 3. Comment all functions (using multi-line comments)
 4. Separate functions from the events that call them. This helps with unit testing, and makes code more modular and easier to understand.
 
@@ -365,9 +353,54 @@ Testing JavaScript really all depends on what framework you are using.
 
 Contemporary JavaScript Unit Testing Boilerplate: [https://github.com/wrumsby/js-testing-boilerplate](https://github.com/wrumsby/js-testing-boilerplate).
 
+## Components
+
+TODO: should these be renamed as 'Modules'? As 'Components' has CSS-only implications.
+
+Components are modular, self-contained packages of code that can be reused across projects.
+
+These can include:
+
+* __JavaScript plugins__, which have been unit tested and optionally configured with various options
+* [__Layout patterns__](#layout-patterns), which are useful for prototyping, and can serve as starting points for further development
+* __Framework helpers__, which can be applied to any module/objects
+* __Workflow helpers__, such as Grunt plugins that perform useful build tasks
+
+#### Layout patterns
+
+__Chrometoaster Pattern Library__: <https://github.com/chrometoasters/ct-patterns>
+
+##### Suggested process for authoring a layout pattern:
+
+1. Identify a recurring pattern in your projects
+1. Ensure that the pattern does not exist in our pattern library (if it does, contact the author to discuss merging in your changes)
+1. Ensure that styles follow our convention then split out to a separate `/dist/styles.scss` file
+1. Ensure that scripts follow our convention then split out to a separate `/dist/scripts.js` file. Note that if the script is complex or can apply to other modules this could be added to a new repo.
+1. Create `/tests` for unit tests for any scripts
+1. Create a `index.html` to show the pattern in action
+1. Create a `README.md` file to explain usage and set up
+1. Create a `bower.json` to describe the package and its dependencies
+1. Commit to our pattern library
+
+*Question: is it possible to get a webhook notification out to the devs when an
+item is added to the pattern library?*
+
+##### Suggested process for reusing a layout pattern:
+
+1. Browse our Github pattern library for available patterns
+1. Pull the pattern down from Github using Bower. This is a one-way action.
+1. Import the HTML (or Mustache/Handlebars) snippet into your template
+1. Import the default/prototype SCSS into your SCSS
+1. Import the prototype JS into your Gruntfile
+1. Customise the HTML, override the CSS in your global theme file.
+
+
 ## Style guidelines
 
-* { on same line as selector
+TODO: merge in the differences from the link that DT sent through
+
+Style is the way that code is written. A consistent style avoids common bugs and allows developers to work on each other's code more easily.
+
 * Properties on new line, even if it's a single property.
 * 1 line between rules
 * JS files that aren't minified should be *.js and minified should be *.min.js
@@ -385,6 +418,8 @@ Contemporary JavaScript Unit Testing Boilerplate: [https://github.com/wrumsby/js
 
 ### Folder structure
 
+TODO: Update this to reflect our structure
+
     themes/
       theme-name/
         css/
@@ -398,8 +433,8 @@ Contemporary JavaScript Unit Testing Boilerplate: [https://github.com/wrumsby/js
 ### SCSS
 
 * Where possible, use index files to include components rather than importing into a file where other styles are defined.
-* CSS components are named _component-file.scss. Files with a name beginning with an underscore will not be compiled as individual css files. 
-* In your index stylesheet, @import a _shame.scss file last. This is an out  for developers who need to hotfix an scss issue and don’t know where the fix should go. 
+* CSS components are named _component-file.scss. Files with a name beginning with an underscore will not be compiled as individual css files.
+* In your index stylesheet, @import a _shame.scss file last. This is an out  for developers who need to hotfix an scss issue and don’t know where the fix should go.
 * Feel free to use sub folders within your scss folder to separate out types of component, or types of scss file.
 * Make sure styles used in the cms are included in a separate file to styles not needed in the CMS (e.g Typography vs Layout et al)
 
@@ -408,23 +443,23 @@ Git repo [https://github.com/silverstripe-ux/frontend-coding-guidelines](https:/
 
 ### Testing
 
-[http://www.webpagetest.org/](http://www.webpagetest.org/)  
-[http://validator.w3.org/](http://validator.w3.org/)  
-[http://wave.webaim.org/](http://wave.webaim.org/)  
-[https://addons.mozilla.org/en-US/firefox/addon/accessibility-evaluation-toolb/](https://addons.mozilla.org/en-US/firefox/addon/accessibility-evaluation-toolb/)  
-[http://www.totalvalidator.com/](http://www.totalvalidator.com/)  
+[http://www.webpagetest.org/](http://www.webpagetest.org/)
+[http://validator.w3.org/](http://validator.w3.org/)
+[http://wave.webaim.org/](http://wave.webaim.org/)
+[https://addons.mozilla.org/en-US/firefox/addon/accessibility-evaluation-toolb/](https://addons.mozilla.org/en-US/firefox/addon/accessibility-evaluation-toolb/)
+[http://www.totalvalidator.com/](http://www.totalvalidator.com/)
 
 ## Internal
 
 ### Frontend Tools
 
-Some of the internal tools that are used at SilverStripe. 
+Some of the internal tools that are used at SilverStripe.
 
-* Sublime Text 
+* Sublime Text
 * Browsers: Chrome, Firefox, Safari, IE 8 +, iOS Simulator (part of xcode)
 * Git: use [SourceTree](http://www.sourcetreeapp.com/) or if you prefer then use Terminal. The github app is a nice gui to use alongside a terminal.
 * Adobe Creative Cloud
 * [ImageOptim](http://imageoptim.com/) for optimising images for the web
 * [MacPorts](http://www.macports.org/) or [HomeBrew](http://brew.sh/) for installing Apache, MySQL etc
-* [VirtualBox](https://www.virtualbox.org/) - for testing in different environments 
+* [VirtualBox](https://www.virtualbox.org/) - for testing in different environments
 * [Browserstack](http://www.browserstack.com/) could also be used for testing in different environments
