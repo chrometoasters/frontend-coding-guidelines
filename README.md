@@ -1,5 +1,7 @@
 # Frontend coding guidelines
 
+__Note: This fork is a work in progress and tailored to the workflow at Chrometoaster. YMMV.__
+
 *This document will*
 
 * Make it easier to peer review
