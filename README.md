@@ -31,7 +31,7 @@ TODO: update
  * [Boilerplate](#boilerplate)
  * [Coding Guidelines](#coding-guidelines)
  * [Testing](#testing)
-* [Workflow: Build systems / Task runners](#workflow-build-systems-task-runners)
+* [Workflow: Build systems / Task runners](#workflow-build-systems--task-runners)
 * [Style Guidelines](#style-guidelines)
 * [Project Setup](#project-setup)
 * [Internal](#internal)
