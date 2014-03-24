@@ -401,7 +401,7 @@ item is added to the pattern library?*
 
 We currently use Grunt on several projects and may include Gulp and/or other solutions in the future.
 
-### Task naming
+### Tasks
 
 Task names and options should follow a set pattern. The idea is that the workflow should operate like an API, where the details of the implementation are hidden from people running the tasks. This allows the implementation to be refactored  as time and knowledge permits:
 
@@ -414,6 +414,9 @@ To run these tasks:
 
 1. Switch to config directory: `cd /path/to/directory`
 2. `[task_runner_name] [task_name]`
+
+* TODO: use a generic task loader, so that tasks don't need to be manually specified
+* TODO: store task configs in a set directory/name
 
 ## Style guidelines
 
