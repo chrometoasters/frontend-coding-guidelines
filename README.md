@@ -31,6 +31,7 @@ TODO: update
  * [Boilerplate](#boilerplate)
  * [Coding Guidelines](#coding-guidelines)
  * [Testing](#testing)
+* [Task runners](#task-runners)
 * [Style Guidelines](#style-guidelines)
 * [Project Setup](#project-setup)
 * [Internal](#internal)
@@ -396,6 +397,23 @@ item is added to the pattern library?*
 1. Import the prototype JS into your Gruntfile
 1. Customise the HTML, override the CSS in your global theme file.
 
+## Task runners
+
+We currently use Grunt on several projects and may include Gulp and/or other solutions in the future.
+
+### Task naming
+
+Task names and options should follow a set pattern. The idea is that the workflow should operate like an API, where the details of the implementation are hidden from people running the tasks. This allows the implementation to be refactored  as time and knowledge permits:
+
+* ` ` (empty) - Run the default task, with a live reload auto-run option
+* `styleguide` - Regenerate a KSS styleguide
+* `test` - Run unit tests and return a report or link to an online summary
+* TODO: add others
+
+To run these tasks:
+
+1. Switch to config directory: `cd /path/to/directory`
+2. `[task_runner_name] [task_name]`
 
 ## Style guidelines
 
