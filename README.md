@@ -405,18 +405,22 @@ We currently use Grunt on several projects and may include Gulp and/or other sol
 
 Task names and options should follow a set pattern. The idea is that the workflow should operate like an API, where the details of the implementation are hidden from people running the tasks. This allows the implementation to be refactored  as time and knowledge permits:
 
-* ` ` (empty) - Run the default task, with a live reload auto-run option
+* `[no task name]` - Run the default task, with a live reload auto-run option
 * `styleguide` - Regenerate a KSS styleguide
 * `test` - Run unit tests and return a report or link to an online summary
 * TODO: add others
+
+> Generally, you should never define tasks (except for aliases, such as test and default in the example) in the Gruntfile itself. Instead, simply create a tasks/ folder to contain your tasks
+<cite>[Thomas Boyt: More maintainable Gruntfiles](http://www.thomasboyt.com/2013/09/01/maintainable-grunt.html)</cite>
+
+The workflow config file (eg `Gruntfile.js`) should then be configured to load any tasks added to the `tasks` folder.
 
 To run these tasks:
 
 1. Switch to config directory: `cd /path/to/directory`
 2. `[task_runner_name] [task_name]`
 
-* TODO: use a generic task loader, so that tasks don't need to be manually specified
-* TODO: store task configs in a set directory/name
+TODO: should we rename this `workflow-tasks` ?
 
 ## Style guidelines
 
