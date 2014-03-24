@@ -31,7 +31,7 @@ TODO: update
  * [Boilerplate](#boilerplate)
  * [Coding Guidelines](#coding-guidelines)
  * [Testing](#testing)
-* [Task runners](#task-runners)
+* [Workflow: Build systems / Task runners](#workflow-build-systems-task-runners)
 * [Style Guidelines](#style-guidelines)
 * [Project Setup](#project-setup)
 * [Internal](#internal)
@@ -397,9 +397,9 @@ item is added to the pattern library?*
 1. Import the prototype JS into your Gruntfile
 1. Customise the HTML, override the CSS in your global theme file.
 
-## Task runners
+## Workflow: Build systems / Task runners
 
-We currently use Grunt on several projects and may include Gulp and/or other solutions in the future.
+We currently use the Grunt task runner on several projects and may include Gulp and/or other solutions in the future.
 
 ### Tasks
 
