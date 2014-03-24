@@ -441,17 +441,42 @@ Style is the way that code is written. A consistent style avoids common bugs and
 
 ### Folder structure
 
-TODO: Update this to reflect our structure
+TODO: Finish updating this to reflect our structure incl common files
 
-    themes/
-      theme-name/
-        css/
-        fonts/
-        images/
-        js/
-        sass/
-        templates/
-        config.rb
+    [context, eg theme-name or root]
+        /resources
+            /build
+                /docs
+                    /styleguide
+                        /generated
+                        /styles
+                /html
+                    /templates
+                /scripts
+                /styles
+                /vendor
+                    /name-of-vendor
+            /dev
+                /docs
+                    /styleguide-template
+                        /public
+                /html
+                    /content
+                    /includes
+                    /templates
+                /scripts
+                /styles
+                /vendor
+                    /name-of-vendor
+            /static
+                /designs
+                /docs
+                /fonts
+                /images
+        
+#### Notes
+
+* `vendor` - should contain all 3rd party and bower-sourced modules; module folders should be direct descendants of the `vendor` folder, as bower will also pull down any dependencies into this folder, and this will allow authors to determine whether there are any clashes between dependencies.
 
 ### SCSS
 
